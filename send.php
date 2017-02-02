@@ -21,3 +21,4 @@ $sql->bindParam(':com',$commentaire, PDO::PARAM_STR);
 $sql->bindParam(':type',$type, PDO::PARAM_STR,10);
 $sql->bindParam(':name', $name, PDO::PARAM_STR,10);
 $sql->bindParam(':date', $date, PDO::param);
+$sql->execute();

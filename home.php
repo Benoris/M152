@@ -1,3 +1,7 @@
+<?php
+require_once 'images.php';
+$posts = getPost();
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -41,18 +45,18 @@ and open the template in the editor.
 
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <img width="50px" height="50px" src="img/prof.png">
+                    <img width="50px" height="50px" src="img/prof.png">Tony Dinh
                     <h3>Bienvenue sur mon blog</h3>
-                </div>
-                <div class="col-md-6">
-                    
-                </div>
+                <?php
+                foreach ($posts as $post) {
+                    echo '<figure>
+  <img src="./img/'.$post['nomMedia'].'" alt="error" />
+  <figcaption>'.$post['commentaire'].'</figcaption>
+</figure>';
+                }
+                ?>
             </div>
         </div>
-        <?php
-        // put your code here
-        ?>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <meta charset="UTF-8">

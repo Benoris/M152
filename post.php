@@ -39,7 +39,7 @@ and open the template in the editor.
             </div><!-- /.container-fluid -->
         </nav>
         <div class="container">
-            <form method="post" action="send" enctype="multipart/form-data">
+            <form method="post" action="send.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="description">Description</label><br>
                     <textarea name="description" placeholder="Votre description..."></textarea>

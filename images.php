@@ -1,9 +1,6 @@
 <?php
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 
 require_once 'Connection.php';
@@ -11,6 +8,18 @@ require_once 'Connection.php';
 function getPost() {
     $db = connectdb();
     $sql = $db->prepare("SELECT * FROM post");
+    $sql->execute();
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+function getMedia($id){
+    $db = connectdb();
+    $sql = $db->prepare("SELECT * FROM media WHERE idPost = ?");
+    $sql->execute(array($id));
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+function getStuff(){
+    $db = connectdb();
+    $sql= $db->prepare("SELECT * FROM post NATURAL JOIN media");
     $sql->execute();
     return $sql->fetchAll(PDO::FETCH_ASSOC);
 }

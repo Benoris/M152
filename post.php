@@ -11,8 +11,7 @@ and open the template in the editor.
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-
+        <meta charset="UTF-8">
         <title>Home</title>
     </head>
     <body>
@@ -39,6 +38,7 @@ and open the template in the editor.
             </div><!-- /.container-fluid -->
         </nav>
         <div class="container">
+        <h1>Images</h1>
             <form method="post" action="send.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="description">Description</label><br>
@@ -46,7 +46,21 @@ and open the template in the editor.
                 </div>
                 <div class="form-group">
                     <label for="inputfile">File input</label>
-                    <input type="file" name="image" id="inputfile" accept="image/jpeg,image/png,image/gif,image/jpg">
+                    <input type="file" name="image[]" id="inputfile" accept="image/*" multiple="">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        <hr>
+        <h1>Vidéo</h1>
+            <form method="post" action="send.php" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="description">Description</label><br>
+                    <textarea name="description" placeholder="Votre description..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputfile">File input</label>
+                    <input type="file" name="image[]" id="inputfile" accept="image/*" multiple="">
                     <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>

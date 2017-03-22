@@ -15,8 +15,6 @@ and open the template in the editor.
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-
         <title>Home</title>
     </head>
     <body>
@@ -42,17 +40,19 @@ and open the template in the editor.
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-
+        
         <div class="container">
             <div class="row">
                     <img width="50px" height="50px" src="img/prof.png">Tony Dinh
                     <h3>Bienvenue sur mon blog</h3>
                 <?php
                 foreach ($posts as $post) {
-                    echo '<figure>
-  <img src="./img/'.$post['nomMedia'].'" alt="error" />
-  <figcaption>'.$post['commentaire'].'</figcaption>
-</figure>';
+                    $media = getMedia($post['idPost']);
+                    foreach ($media as $img){
+                    echo '<figure>'
+                        . '<img src="./img/'.$img['nomFichierMedia'].'" alt="error" />';
+                    }
+                            echo '<figcaption>'.$post['commentaire'].'</figcaption></figure>';
                 }
                 ?>
             </div>

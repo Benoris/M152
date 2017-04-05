@@ -55,15 +55,15 @@ and open the template in the editor.
         <h1>Vidéo</h1>
             <form method="post" action="send.php" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="description">Description</label><br>
-                    <textarea name="description" placeholder="Votre description..."></textarea>
+                    <label for="descriptionvid">Description</label><br>
+                    <textarea name="descriptionvid" placeholder="Votre description..."></textarea>
                 </div>
                 <div class="form-group">
                     <label for="inputfile">File input</label>
-                    <input type="file" name="image[]" id="inputfile" accept="image/*" multiple="">
+                    <input type="file" name="video[]" id="inputfile" accept="video/*" multiple="">
                     <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submitvid" class="btn btn-default">Submit</button>
             </form>
         </div>
         <?php

@@ -8,35 +8,63 @@
 
 require_once 'Connection.php';
 
-$commentaire = trim(filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING));
-$file = $_FILES['image'];
-var_dump($_FILES['image']['name'][0]);
-var_dump($_FILES['image']['name'][1]);
-
-$type = $file['type'];
-$name = $file['name'];
+$db = connectdb();
 $date = date("Y-m-d H:i:s");
 
-$folder = '.\img\\';
-
-    $db = connectdb();
-
-
+if (isset($_POST['submit'])) {
+    $commentaire = trim(filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING));
+    $img = $_FILES['image'];
+    $type = $img['type'];
+    $name = $img['name'];
+    $vid = $_FILES['video'];
     $sql = $db->prepare("INSERT INTO post (commentaire,datePost) VALUES (:com,:date)");
     $sql->bindParam(':com', $commentaire, PDO::PARAM_STR);
     $sql->bindParam(':date', $date, PDO::PARAM_STR);
     $sql->execute();
     $idNewPost = $db->lastInsertId();
-    //boucle pour parcourir $_FILES
+
+    $folderimg = '.\img\\';
+
+//boucle pour parcourir $_FILES
     for ($i = 0; $i <= count($_FILES); $i++) {
         $sql2 = $db->prepare("INSERT INTO media (nomFichierMedia,typeMedia,idPost) VALUES (:name,:type,:idpost)");
         $sql2->bindParam(':name', $_FILES['image']['name'][$i], PDO::PARAM_STR);
         $sql2->bindParam(':type', $_FILES['image']['type'][$i], PDO::PARAM_STR);
         $sql2->bindParam(':idpost', $idNewPost, PDO::PARAM_INT);
         $sql2->execute();
-        $result = move_uploaded_file($_FILES['image']['tmp_name'][$i], $folder . $_FILES['image']['name'][$i]);
+        $result = move_uploaded_file($_FILES['image']['tmp_name'][$i], $folderimg . $_FILES['image']['name'][$i]);
     }
+}
 
-    //fin boucle
 
-header("Location:home.php");
+if (isset($_POST['submitvid'])) {
+    $commentairevid = trim(filter_input(INPUT_POST, 'descriptionvid', FILTER_SANITIZE_STRING));
+    $typevid = $vid['type'];
+    $namevid = $vid['name'];
+    $datevid = date("Y-m-d H:i:s");
+
+    $foldervid = '.\vid\\';
+
+    $sql = $db->prepare("INSERT INTO post (commentaire,datePost) VALUES (:com,:date)");
+    $sql->bindParam(':com', $commentairevid, PDO::PARAM_STR);
+    $sql->bindParam(':date', $date, PDO::PARAM_STR);
+    $sql->execute();
+    $idNewPost = $db->lastInsertId();
+//boucle pour parcourir $_FILES
+    for ($i = 0; $i <= count($_FILES); $i++) {
+        $sql2 = $db->prepare("INSERT INTO media (nomFichierMedia,typeMedia,idPost) VALUES (:name,:type,:idpost)");
+        $sql2->bindParam(':name', $_FILES['video']['name'][$i], PDO::PARAM_STR);
+        $sql2->bindParam(':type', $_FILES['video']['type'][$i], PDO::PARAM_STR);
+        $sql2->bindParam(':idpost', $idNewPost, PDO::PARAM_INT);
+        $sql2->execute();
+        $result = move_uploaded_file($_FILES['video']['tmp_name'][$i], $foldervid . $_FILES['video']['name'][$i]);
+    }
+}
+
+
+
+
+
+//fin boucle
+var_dump($_FILES['video']);
+//header("Location:home.php");

@@ -49,11 +49,9 @@ and open the template in the editor.
                     <input type="file" name="image[]" id="inputfile" accept="image/*" multiple="">
                     <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+                <button type="submit" name="submitimg" class="btn btn-default">Submit</button>
         <hr>
         <h1>Vidéo</h1>
-            <form method="post" action="send.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="descriptionvid">Description</label><br>
                     <textarea name="descriptionvid" placeholder="Votre description..."></textarea>
@@ -63,7 +61,7 @@ and open the template in the editor.
                     <input type="file" name="video[]" id="inputfile" accept="video/*" multiple="">
                     <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                 </div>
-                <button type="submitvid" class="btn btn-default">Submit</button>
+        <button type="submit" name="submitvid" class="btn btn-default">Submit</button>
             </form>
         </div>
         <?php

@@ -10,23 +10,19 @@ require_once 'Connection.php';
 
 $db = connectdb();
 $date = date("Y-m-d H:i:s");
-
-if (isset($_POST['submit'])) {
+if(isset($_POST['submitimg']))
+{
     $commentaire = trim(filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING));
-    $img = $_FILES['image'];
-    $type = $img['type'];
-    $name = $img['name'];
-    $vid = $_FILES['video'];
+    
     $sql = $db->prepare("INSERT INTO post (commentaire,datePost) VALUES (:com,:date)");
     $sql->bindParam(':com', $commentaire, PDO::PARAM_STR);
     $sql->bindParam(':date', $date, PDO::PARAM_STR);
     $sql->execute();
     $idNewPost = $db->lastInsertId();
-
     $folderimg = '.\img\\';
 
 //boucle pour parcourir $_FILES
-    for ($i = 0; $i <= count($_FILES); $i++) {
+    for ($i = 0; $i < count($_FILES['image']['name']); $i++) {
         $sql2 = $db->prepare("INSERT INTO media (nomFichierMedia,typeMedia,idPost) VALUES (:name,:type,:idpost)");
         $sql2->bindParam(':name', $_FILES['image']['name'][$i], PDO::PARAM_STR);
         $sql2->bindParam(':type', $_FILES['image']['type'][$i], PDO::PARAM_STR);
@@ -36,12 +32,8 @@ if (isset($_POST['submit'])) {
     }
 }
 
-
-if (isset($_POST['submitvid'])) {
+if(isset($_POST['submitvid'])){
     $commentairevid = trim(filter_input(INPUT_POST, 'descriptionvid', FILTER_SANITIZE_STRING));
-    $typevid = $vid['type'];
-    $namevid = $vid['name'];
-    $datevid = date("Y-m-d H:i:s");
 
     $foldervid = '.\vid\\';
 
@@ -51,7 +43,7 @@ if (isset($_POST['submitvid'])) {
     $sql->execute();
     $idNewPost = $db->lastInsertId();
 //boucle pour parcourir $_FILES
-    for ($i = 0; $i <= count($_FILES); $i++) {
+    for ($i = 0; $i < count($_FILES['video']['name']); $i++) {
         $sql2 = $db->prepare("INSERT INTO media (nomFichierMedia,typeMedia,idPost) VALUES (:name,:type,:idpost)");
         $sql2->bindParam(':name', $_FILES['video']['name'][$i], PDO::PARAM_STR);
         $sql2->bindParam(':type', $_FILES['video']['type'][$i], PDO::PARAM_STR);
@@ -62,9 +54,5 @@ if (isset($_POST['submitvid'])) {
 }
 
 
-
-
-
 //fin boucle
-var_dump($_FILES['video']);
-//header("Location:home.php");
+header("Location:home.php");

@@ -48,11 +48,23 @@ and open the template in the editor.
                 <?php
                 foreach ($posts as $post) {
                     $media = getMedia($post['idPost']);
+                    if($media != "video"){
                     foreach ($media as $img){
                     echo '<figure>'
                         . '<img src="./img/'.$img['nomFichierMedia'].'" alt="error" />';
                     }
                             echo '<figcaption>'.$post['commentaire'].'</figcaption></figure>';
+                    }
+                    else{
+                        
+                    foreach ($media as $vid){
+                    echo '  <video width="320" height="240" controls>
+                            <source src="./vid/'.$vid['nomFichierMedia'].'" type="video/mp4">
+                            Your browser does not support the video tag.
+                            </video>';
+                    }
+                            echo '<figcaption>'.$vid['commentaire'].'</figcaption>';
+                    }
                 }
                 ?>
             </div>

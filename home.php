@@ -12,7 +12,7 @@ and open the template in the editor.
     <head>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+        <meta charset="utf-8">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <title>Home</title>
@@ -40,31 +40,31 @@ and open the template in the editor.
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-        
+
         <div class="container">
             <div class="row">
-                    <img width="50px" height="50px" src="img/prof.png">Tony Dinh
-                    <h3>Bienvenue sur mon blog</h3>
+                <img width="50px" height="50px" src="img/prof.png">Tony Dinh
+                <h3>Bienvenue sur mon blog</h3>
                 <?php
                 foreach ($posts as $post) {
                     $media = getMedia($post['idPost']);
-                    if($media != "video"){
-                    foreach ($media as $img){
-                    echo '<figure>'
-                        . '<img src="./img/'.$img['nomFichierMedia'].'" alt="error" />';
-                    }
-                            echo '<figcaption>'.$post['commentaire'].'</figcaption></figure>';
-                    }
-                    else{
-                        
-                    foreach ($media as $vid){
-                    echo '  <video width="320" height="240" controls>
-                            <source src="./vid/'.$vid['nomFichierMedia'].'" type="video/mp4">
+                    foreach ($media as $img) {
+                        if ($img['typeMedia'] == "image/jpeg") {
+                            echo '<figure>'
+                            . '<img src="./img/' . $img['nomFichierMedia'] . '" alt="error" />';
+                        } else if ($img['typeMedia'] == "video/mp4") {
+                            echo '  <video width="320" height="240" controls>
+                            <source src="./vid/' . $img['nomFichierMedia'] . '" type="video/mp4">
                             Your browser does not support the video tag.
                             </video>';
+                        } else if ($img['typeMedia'] == "audio/mp3") {
+                            echo '<audio controls>
+                                    <source src="./aud/'.$img['nomFichierMedia'].'" type="'.$img['typeMedia'].'">
+                                    Your browser does not support the audio element.
+                                    </audio>';
+                        }
                     }
-                            echo '<figcaption>'.$vid['commentaire'].'</figcaption>';
-                    }
+                    echo '<figcaption>' . $post['commentaire'] . '</figcaption></figure>';
                 }
                 ?>
             </div>

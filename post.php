@@ -38,7 +38,7 @@ and open the template in the editor.
             </div><!-- /.container-fluid -->
         </nav>
         <div class="container">
-        <h1>Images</h1>
+            <h1>Images</h1>
             <form method="post" action="send.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="description">Description</label><br>
@@ -47,11 +47,10 @@ and open the template in the editor.
                 <div class="form-group">
                     <label for="inputfile">File input</label>
                     <input type="file" name="image[]" id="inputfile" accept="image/*" multiple="">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                 </div>
                 <button type="submit" name="submitimg" class="btn btn-default">Submit</button>
-        <hr>
-        <h1>Vidéo</h1>
+                <hr>
+                <h1>Vidéo</h1>
                 <div class="form-group">
                     <label for="descriptionvid">Description</label><br>
                     <textarea name="descriptionvid" placeholder="Votre description..."></textarea>
@@ -59,9 +58,19 @@ and open the template in the editor.
                 <div class="form-group">
                     <label for="inputfile">File input</label>
                     <input type="file" name="video[]" id="inputfile" accept="video/*" multiple="">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                 </div>
-        <button type="submit" name="submitvid" class="btn btn-default">Submit</button>
+                <button type="submit" name="submitvid" class="btn btn-default">Submit</button>
+                <hr>
+                <h1>Audio</h1>
+                <div class="form-group">
+                    <label for="descriptionaudio">Description</label><br>
+                    <textarea name="descriptionaudio" placeholder="Votre description..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputfile">File input</label>
+                    <input type="file" name="audio[]" id="inputfile" accept="audio/mp3" multiple="">
+                </div>
+                <button type="submit" name="submitaudio" class="btn btn-default">Submit</button>
             </form>
         </div>
         <?php
